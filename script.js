@@ -60,5 +60,24 @@ L.marker([-25.732144, 28.163585])
 .addTo(map)
 .bindPopup("Building 3");
 
-
+const locations = [
+  {
+    name: "Library",
+    type: "building",
+    lat: -25.7545,
+    lng: 28.2314
+  },
+  {
+    name: "Mechanical Building",
+    type: "building",
+    lat: -25.7551,
+    lng: 28.2320
+  },
+  {
+    name: "Parking A",
+    type: "parking",
+    lat: -25.7538,
+    lng: 28.2309
+  }
+];
 
