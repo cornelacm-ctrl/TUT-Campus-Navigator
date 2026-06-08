@@ -1,5 +1,5 @@
 const map = L.map('map').setView(
-    [-25.7545, 28.2314],
+    [-25.732365, 28.161859],
     16
 );
 
@@ -60,24 +60,63 @@ L.marker([-25.732144, 28.163585])
 .addTo(map)
 .bindPopup("Building 3");
 
-const locations = [
-  {
-    name: "Library",
-    type: "building",
-    lat: -25.7545,
-    lng: 28.2314
-  },
-  {
-    name: "Mechanical Building",
-    type: "building",
-    lat: -25.7551,
-    lng: 28.2320
-  },
-  {
-    name: "Parking A",
-    type: "parking",
-    lat: -25.7538,
-    lng: 28.2309
-  }
-];
+locations.forEach(loc => {
+  L.marker([loc.lat, loc.lng])
+    .addTo(map)
+    .bindPopup(loc.name);
+});
 
+document.getElementById("searchBox").addEventListener("input", function (e) {
+  const query = e.target.value.toLowerCase();
+
+  const match = locations.find(loc =>
+    loc.name.toLowerCase().includes(query)
+  );
+
+  if (match) {
+    map.setView([match.lat, match.lng], 18);
+
+    L.popup()
+      .setLatLng([match.lat, match.lng])
+      .setContent(match.name)
+      .openOn(map);
+  }
+});
+
+let routeControl;
+
+function goTo(destination) {
+
+  navigator.geolocation.getCurrentPosition(pos => {
+
+    const userLat = pos.coords.latitude;
+    const userLng = pos.coords.longitude;
+
+    if (routeControl) {
+      map.removeControl(routeControl);
+    }
+
+    routeControl = L.Routing.control({
+      waypoints: [
+        L.latLng(userLat, userLng),
+        L.latLng(destination.lat, destination.lng)
+      ],
+      routeWhileDragging: false
+    }).addTo(map);
+
+  });
+}
+
+if (match) {
+  map.setView([match.lat, match.lng], 18);
+
+  L.popup()
+    .setLatLng([match.lat, match.lng])
+    .setContent(`
+      <b>${match.name}</b><br>
+      <button onclick="goTo(${JSON.stringify(match)})">
+        Get Directions
+      </button>
+    `)
+    .openOn(map);
+}
