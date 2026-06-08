@@ -7,7 +7,18 @@ h1{
     text-align:center;
 }
 
+#searchBox {
+  position: absolute;
+  top: 20px;
+  left: 85%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 10px;
+  width: 250px;
+}
+
 #map{
     height:90vh;
     width:100%;
 }
+
