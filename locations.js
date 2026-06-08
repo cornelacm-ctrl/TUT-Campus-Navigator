@@ -6,7 +6,7 @@ const locations = [
     lng: 28.164855
   },
   {
-    name: "Building 5",
+    name: "Building 3",
     type: "building",
     lat: -25.732144,
     lng: 28.163585
