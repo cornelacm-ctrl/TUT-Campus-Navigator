@@ -15,6 +15,7 @@
 
 <h1>Tshwane University of Technology Navigator</h1>
 <input id="searchBox" placeholder="Search campus..." />
+<button id="adminToggle" type="button">Admin</button>
 
 <div id="sidebar">
   <h3>Campus Directory</h3>
@@ -24,7 +25,78 @@
 
 <div id="map"></div>
 
-<div id="map"></div>
+<div id="adminPanel" class="admin-panel" hidden>
+  <div class="admin-panel-header">
+    <strong>Admin</strong>
+    <button id="adminClose" type="button" aria-label="Close admin panel">x</button>
+  </div>
+
+  <form id="adminLoginForm" class="admin-stack">
+    <input id="adminUsername" autocomplete="username" placeholder="Username" value="admin" />
+    <input id="adminPassword" autocomplete="current-password" placeholder="Password" type="password" />
+    <button type="submit">Log in</button>
+  </form>
+
+  <div id="adminTools" class="admin-stack" hidden>
+    <label>
+      Add
+      <select id="adminMode">
+        <option value="building">Building</option>
+        <option value="parking">Parking</option>
+        <option value="gate">Gate</option>
+        <option value="point">Point</option>
+        <option value="junction">Node</option>
+        <option value="indoor">Indoor Node</option>
+        <option value="entrance">Entrance</option>
+        <option value="road">Road / Path</option>
+      </select>
+    </label>
+
+    <form id="adminItemForm" class="admin-stack">
+      <label>
+        <span id="adminNameLabel">Name</span>
+        <input id="adminItemName" placeholder="Building 21" />
+      </label>
+
+      <div class="admin-grid">
+        <label>
+          Lat
+          <input id="adminLat" inputmode="decimal" placeholder="-25.732000" />
+        </label>
+        <label>
+          Lng
+          <input id="adminLng" inputmode="decimal" placeholder="28.164000" />
+        </label>
+      </div>
+
+      <button id="adminAddItem" type="submit">Add / Update</button>
+    </form>
+
+    <label class="admin-check">
+      <input id="adminShowConnections" type="checkbox" />
+      Show connections
+    </label>
+
+    <div id="adminRoadTools" class="admin-stack" hidden>
+      <label>
+        From
+        <select id="adminRoadFrom"></select>
+      </label>
+      <label>
+        To
+        <select id="adminRoadTo"></select>
+      </label>
+      <button id="adminAddRoad" type="button">Add Road / Path</button>
+    </div>
+
+    <div class="admin-actions">
+      <button id="adminSave" type="button">Save Files</button>
+      <button id="adminLogout" type="button">Log out</button>
+    </div>
+
+    <div id="adminStatus" class="admin-status"></div>
+  </div>
+</div>
 
 <script
  src="https://unpkg.com/leaflet/dist/leaflet.js">
@@ -38,8 +110,9 @@
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 
 <script src="locations.js"></script>
+<script src="graph.js"></script>
 <script src="script.js"></script>
+<script src="admin.js"></script>
 
 </body>
 </html>
-
